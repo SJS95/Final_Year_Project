@@ -26,7 +26,7 @@
 
 
 
-= form_for @order, :url => orders_url, :html => {:method => :post} do |f|
+= form_for @order, :url => orders_path, :html => {:method => :post} do |f|
   - if @order.errors.any?
     #error_explanation
       %h2

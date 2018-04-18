@@ -2,11 +2,14 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
 
-    if @order.save
-      redirect_to @order
-    else
-      render 'new'
+    respond_to do |format|
+      if @order.save
+        format.html { redirect_to orders_path(@order) }
+      else
+        format.html { render :new }
+      end
     end
+
   end
 
   def new
