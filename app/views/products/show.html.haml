@@ -27,30 +27,30 @@
 
 
 
--#= form_for @order, :url => orders_path, :html => {:method => :post} do |f|
--#  - if @order.errors.any?
--#    #error_explanation
--#      %h2
--#        = pluralize(@porder.errors.count, "error")
--#        prohibited this product from being saved:
--#      %ul
--#        - @order.errors.full_messages.each do |message|
--#          %li= message
--#
--#  %br
--#    = f.file_field id: @product.id
--#    %br
--#    %br
--#  %p
--#    -#= f.text_field :courier_id
--#    %br
--#    %br
--#    %br
--#  %p
--#    = f.text_field :customer_id
--#    %br
--#    %br
--#    %br
--#  %p.actions
--#    %br
--#    = f.submit "Order", controller: "orders", action: "new"
+= form_for @order, :url => orders_path, :html => {:method => :post} do |f|
+  - if @order.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@porder.errors.count, "error")
+        prohibited this product from being saved:
+      %ul
+        - @order.errors.full_messages.each do |message|
+          %li= message
+
+  %br
+    = f.file_field id: @product.id
+    %br
+    %br
+  %p
+    -#= f.text_field :courier_id
+    %br
+    %br
+    %br
+  %p
+    -#= f.text_field :customer_id
+    %br
+    %br
+    %br
+  %p.actions
+    %br
+    = f.submit "Order", controller: "orders", action: "new"
