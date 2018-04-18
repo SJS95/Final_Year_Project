@@ -38,19 +38,17 @@
           %li= message
 
   %br
-    = f.file_field id: @product.id
-    %br
-    %br
+  %br
+  %br
   %p
-    -#= f.text_field :courier_id
+    = f.text_field :quantity
     %br
     %br
     %br
-  %p
-    -#= f.text_field :customer_id
-    %br
-    %br
-    %br
+    = f.hidden_field :product_id, value: @product.id
+    -#= f.hidden_field :customer_id, value: @customer.id
+    =@customer.inspect
+
   %p.actions
     %br
     = f.submit "Order", controller: "orders", action: "new"
