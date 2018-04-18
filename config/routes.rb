@@ -1,6 +1,16 @@
 Rails.application.routes.draw do
   devise_for :customers
+  get 'home/index'
+  get 'products/index'
+  get 'devise/user_session'
+  get 'devise/destroy_user_session'
 
-  root to: 'home#index'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :products
+  resources :devise
+  # resources :charges
+  resources :orders
+
+  resources :images, only: [:index, :new, :create, :destroy]
+
+  root 'home#index'
 end

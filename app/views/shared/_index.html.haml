@@ -1,0 +1,17 @@
+.tab-pane
+  .container
+    - if customer_signed_in?
+      %br
+      = link_to 'Add product', new_product_path(@product), class: "btn btn-primary"
+      %br
+      .row
+        .span4
+        - @products.each do |product|
+          %br
+          .card{:style => "width: 20rem;"}
+            .card-block
+              %h4= product.title
+              = image_tag product.image_url, class: "small" rescue nil
+              %p.card-text= product.description
+              %h4= product.price
+              = link_to 'More details', product_path(product), class: "btn btn-primary"

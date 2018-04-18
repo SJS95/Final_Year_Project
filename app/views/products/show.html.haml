@@ -1,0 +1,56 @@
+=render :partial => 'shared/header'
+#body
+  .container
+  .mycontainer
+    %span.box1.box2
+      %h2= @product.title
+      %br
+      %h4= @product.description
+      %br
+      = image_tag(@product.image_url(:thumb).to_s)
+      %br
+      %h2= @product.brand
+      %br
+      %h2= @product.manufacturer
+      %br
+      %h2= @product.model
+      %br
+      %h2= @product.price
+
+
+      = link_to 'Edit', controller: "products", action: "edit", product: @product.id
+      = link_to 'Delete', controller: "products", action: "destroy", product: @product.id
+      -#= link_to 'Join Group Buy', controller: "charges", action: "new", product: @product.id
+      -#%script.stripe-button{"data-amount" => "@product.price", "data-description" => "Enter payment details below", "data-key" => Rails.configuration.stripe[:publishable_key], "data-locale" => "auto", :src => "https://checkout.stripe.com/checkout.js"}
+      -#%script.stripe-button{ src: "https://checkout.stripe.com/checkout.js",
+              data: {amount: @product.price * 10, description: @product.title, key: Rails.configuration.stripe[:publishable_key]}}
+
+
+
+-#= form_for @order, :url => orders_path, :html => {:method => :post} do |f|
+-#  - if @order.errors.any?
+-#    #error_explanation
+-#      %h2
+-#        = pluralize(@porder.errors.count, "error")
+-#        prohibited this product from being saved:
+-#      %ul
+-#        - @order.errors.full_messages.each do |message|
+-#          %li= message
+-#
+-#  %br
+-#    = f.file_field id: @product.id
+-#    %br
+-#    %br
+-#  %p
+-#    -#= f.text_field :courier_id
+-#    %br
+-#    %br
+-#    %br
+-#  %p
+-#    = f.text_field :customer_id
+-#    %br
+-#    %br
+-#    %br
+-#  %p.actions
+-#    %br
+-#    = f.submit "Order", controller: "orders", action: "new"

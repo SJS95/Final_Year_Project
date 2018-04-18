@@ -1,0 +1,30 @@
+=render :partial => 'shared/header'
+
+= form_for @product, html: { multipart: true } do |f|
+  - if @product.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@product.errors.count, "error")
+        prohibited this pet from being saved:
+      %ul
+        - @product.errors.full_messages.each do |message|
+          %li= message
+
+  %br
+    = f.text_field :title
+  %br
+    = f.text_field :description
+  %br
+    = f.text_field :image
+  %br
+    = f.text_field :brand
+  %br
+    = f.text_field :manufacturer
+  %br
+    = f.text_field :model
+  %br
+    = f.text_field :price
+  %p.actions
+    %br
+    = link_to "Cancel", products_path, class: "form-cancel"
+    = f.submit "Save", class: "form-submit"
