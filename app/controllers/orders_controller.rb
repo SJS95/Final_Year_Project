@@ -9,8 +9,13 @@ class OrdersController < ApplicationController
     end
   end
 
+  def new
+    @order = Order.new
+  end
+
   def show
     @order = Order.find(params[:id])
+    # @customer = Customer.find(params[:id])
   end
 
   private

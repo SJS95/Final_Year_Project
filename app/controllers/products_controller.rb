@@ -7,12 +7,11 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
     @order = Order.new
-    @customer = Customer.all
+    @customer = current_customer.customer_id
   end
 
   def new
     @product = Product.new
-    render text: params
   end
 
   def edit
