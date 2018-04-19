@@ -1,2 +1,17 @@
 =render :partial => 'shared/header'
-sam1
+%h2 Order Details
+=@order
+%h2 Shipping Details
+=@customer.forename
+%br
+=@customer.surname
+%br
+=@customer.address
+%br
+=@customer.postcode
+%br
+=@customer.county
+%br
+=@customer.city
+%br
+=@customer.country

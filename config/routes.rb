@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :customers
+  devise_for :customers, :controllers => { registrations: 'registrations' }
   get 'home/index'
   get 'products/index'
   get 'devise/user_session'

@@ -1,4 +1,10 @@
 class OrdersController < ApplicationController
+
+  def index
+    @order = Order.all
+    @customer = current_customer
+  end
+
   def create
     @order = Order.new(order_params)
 
@@ -18,7 +24,6 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    # @customer = Customer.find(params[:id])
   end
 
   private
