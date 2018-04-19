@@ -1,7 +1,6 @@
 class ProductsController < ApplicationController
   def index
     @products = Product.search(params[:term])
-    render text: params
   end
 
   def show

@@ -1,10 +1,7 @@
 class OrdersController < ApplicationController
-
   def index
-    @order = Order.all
     @customer = current_customer
   end
-
   def create
     @order = Order.new(order_params)
 
@@ -15,15 +12,10 @@ class OrdersController < ApplicationController
         format.html { render :new }
       end
     end
-
   end
 
   def new
     @order = Order.new
-  end
-
-  def show
-    @order = Order.find(params[:id])
   end
 
   private
