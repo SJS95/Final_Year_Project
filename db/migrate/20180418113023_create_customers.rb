@@ -1,7 +1,8 @@
 class CreateCustomers < ActiveRecord::Migration[5.1]
   def change
     create_table :customers, id: false do |t|
-      t.primary_key :cutomer_id
+      t.primary_key :customer_id
+      t.references :order
       t.string :forename
       t.string :surname
       t.string :address

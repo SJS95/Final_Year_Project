@@ -2,6 +2,7 @@ class CreateProducts < ActiveRecord::Migration[5.1]
   def change
     create_table :products, id: false do |t|
       t.primary_key :product_id
+      t.references :order
       t.string :title
       t.string :description
       t.integer :price

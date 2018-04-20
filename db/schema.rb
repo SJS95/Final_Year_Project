@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180418192404) do
+ActiveRecord::Schema.define(version: 20180418123315) do
 
   create_table "customers", primary_key: "customer_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "order_id"
     t.string "forename"
     t.string "surname"
     t.string "address"
@@ -33,19 +34,23 @@ ActiveRecord::Schema.define(version: 20180418192404) do
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.index ["email"], name: "index_customers_on_email", unique: true
+    t.index ["order_id"], name: "index_customers_on_order_id"
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
 
   create_table "orders", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "customer_id"
     t.bigint "product_id"
+    t.integer "quantity"
     t.date "order_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "quantity"
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
+    t.index ["product_id"], name: "index_orders_on_product_id"
   end
 
   create_table "products", primary_key: "product_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "order_id"
     t.string "title"
     t.string "description"
     t.integer "price"
@@ -59,6 +64,7 @@ ActiveRecord::Schema.define(version: 20180418192404) do
     t.integer "cheapest_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_products_on_order_id"
   end
 
 end
