@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180418123315) do
+ActiveRecord::Schema.define(version: 20180420185536) do
 
   create_table "customers", primary_key: "customer_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "order_id"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 20180418123315) do
     t.integer "cheapest_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "product_end_date"
     t.index ["order_id"], name: "index_products_on_order_id"
   end
 

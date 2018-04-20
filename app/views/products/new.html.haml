@@ -30,7 +30,6 @@
     = f.text_field :brand, placeholder: "Brand"
     %br
     %br
-  %p
   -#  = f.text_field :manufacturer, placeholder: "Manufacturer"
   -#  %br
   -#  %br
@@ -45,6 +44,10 @@
     %h5 Enter number of sales to unlock the cheapest price
     = f.text_field :cheapest_target, placeholder: "Target sales"
     = f.text_field :cheapest_price, placeholder: "Cheapest Price"
+    %br
+  %p
+    = f.text_field :product_end_date, placeholder: "What date should the product end?"
+    %br
     %br
     %br
 
