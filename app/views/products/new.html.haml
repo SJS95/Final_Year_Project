@@ -1,5 +1,5 @@
 =render :partial => 'shared/header'
-= form_for @product, html: { multipart: true } do |f|
+= form_for @product, id: "myForm", html: { multipart: true } do |f|
   - if @product.errors.any?
     #error_explanation
       %h2
@@ -10,11 +10,11 @@
           %li= message
 
   %br
-    = f.text_field :title, placeholder: "Title"
+    = f.text_field :title, placeholder: "Title", required: true
     %br
     %br
   %p
-    = f.text_field :description, placeholder: "Description"
+    = f.text_field :description, placeholder: "Description", required: true
     %br
     %br
     %br
@@ -36,17 +36,21 @@
   -#%p
   -#  = f.text_field :model, placeholder: "Model"
   -#  %br
-  %p
-    = f.text_field :price, placeholder: "Starting Price"
+  %p#number-error-dialog
+    = f.text_field :price, placeholder: "Starting Price", required: true, "data-validation" =>"number"
     %h5 Enter number of sales to unlock the cheaper price
-    = f.text_field :cheaper_target, placeholder: "Target sales"
-    = f.text_field :cheaper_price, placeholder: "Cheaper Price"
+  %p#number-error-dialog
+    = f.text_field :cheaper_target, placeholder: "Target sales", "data-validation" =>"number"
+    = f.text_field :cheaper_price, placeholder: "Cheaper Price", "data-validation" =>"number"
     %h5 Enter number of sales to unlock the cheapest price
-    = f.text_field :cheapest_target, placeholder: "Target sales"
-    = f.text_field :cheapest_price, placeholder: "Cheapest Price"
+  %p#number-error-dialog
+    = f.text_field :cheapest_target, placeholder: "Target sales", "data-validation" =>"number"
+    = f.text_field :cheapest_price, placeholder: "Cheapest Price", "data-validation" =>"number"
     %br
   %p
-    = f.text_field :product_end_date, placeholder: "What date should the product end?"
+    %h5 What date should the product end?
+    #date-error-dialog
+      = f.text_field :product_end_date, placeholder: "YYYY-MM-DD", required: true, "data-validation" => "date", "data-validation-format" => "yyyy-mm-dd"
     %br
     %br
     %br
@@ -56,3 +60,10 @@
     = link_to "Cancel", products_path, class: "form-cancel"
     = f.submit "Save", class: "form-submit"
     #target.thumbnail
+
+%script{:src => "//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"}
+%script{:src => "//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"}
+
+:javascript
+  $.validate({
+  });

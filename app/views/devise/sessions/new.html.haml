@@ -1,18 +1,28 @@
 =render :partial => 'shared/header'
-%h2 Log in
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-    %br/
-    = f.password_field :password, autocomplete: "off"
-  - if devise_mapping.rememberable?
-    .field
-      = f.check_box :remember_me
-      = f.label :remember_me
-  .actions
-    = f.submit "Log in"
-= render "devise/shared/links"
+.div.center.space-50
+  %h2 Log in
+  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    .field.space-20
+      = f.label :email
+      %br
+        = f.email_field :email, "data-validation" => "email", autofocus: true, autocomplete: "email"
+    #email-error-dialog
+    .field.space-20
+      = f.label :password
+      %br
+      = f.password_field :password, autocomplete: "off"
+    - if devise_mapping.rememberable?
+      .field.space-20
+        = f.check_box :remember_me
+        = f.label :remember_me
+    .actions.space-20
+      = f.submit "Log in"
+    .space-20
+  = render "devise/shared/links"
+
+%script{:src => "//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"}
+%script{:src => "//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"}
+
+:javascript
+  $.validate({
+  });

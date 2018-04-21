@@ -1,28 +1,30 @@
 =render :partial => 'shared/header'
 #body
-  .container
-  .mycontainer
+  .center
     %span.box1.box2
-      %h2= @product.title
-      %br
-      %h4= @product.description
-      %br
-      = image_tag(@product.image_url(:thumb).to_s)
-      %br
-      %h2= @product.brand
-      %br
-      %h2= @product.manufacturer
-      %br
-      %h2= @product.model
-      %br
-      %h2= @product.price
+      %h2.space-50= @product.title
+  %table.center.space-50
+    %tr
+      %td= image_tag(@product.image_url(:thumb).to_s)
+      %td= @product.description
+    %tr
+      %td
+      %td= @product.brand
+    %tr
+      %td
+      %td= @product.manufacturer
+    %tr
+      %td
+      %td= @product.model
+  .center.space-50
+    %h3 Price
+    %h3= @product.price
 
-
-      = link_to 'Edit', controller: "products", action: "edit", product: @product.id
-      = link_to 'Delete', controller: "products", action: "destroy", product: @product.id
-      -#%script.stripe-button{"data-amount" => "@product.price", "data-description" => "Enter payment details below", "data-key" => Rails.configuration.stripe[:publishable_key], "data-locale" => "auto", :src => "https://checkout.stripe.com/checkout.js"}
-      -#%script.stripe-button{ src: "https://checkout.stripe.com/checkout.js",
-              data: {amount: @product.price * 10, description: @product.title, key: Rails.configuration.stripe[:publishable_key]}}
+    = link_to 'Edit', controller: "products", action: "edit", product: @product.id
+    = link_to 'Delete', controller: "products", action: "destroy", product: @product.id
+    -#%script.stripe-button{"data-amount" => "@product.price", "data-description" => "Enter payment details below", "data-key" => Rails.configuration.stripe[:publishable_key], "data-locale" => "auto", :src => "https://checkout.stripe.com/checkout.js"}
+    -#%script.stripe-button{ src: "https://checkout.stripe.com/checkout.js",
+            data: {amount: @product.price * 10, description: @product.title, key: Rails.configuration.stripe[:publishable_key]}}
 
 
 
@@ -35,17 +37,15 @@
       %ul
         - @order.errors.full_messages.each do |message|
           %li= message
-  %br
-  %br
-  %br
-  %p
+
+  %p.center.space-20
+    = f.label :quantity
+    %br
     = f.text_field :quantity
-    %br
-    %br
     %br
     = f.hidden_field :product_id, value: @product.id
     = f.hidden_field :customer_id, value: @customer
 
-  %p.actions
+  %p.actions.center
     %br
     = f.submit "Order", controller: "orders", action: "new"
