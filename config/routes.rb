@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   resources :products
   resources :devise
-  # resources :charges
+  resources :charges
   resources :orders
 
   resources :images, only: [:index, :new, :create, :destroy]

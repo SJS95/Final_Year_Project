@@ -1,17 +1,16 @@
 =render :partial => 'shared/header'
-%h2 Order Details
-=@order
-%h2 Shipping Details
-=@customer.forename
-%br
-=@customer.surname
-%br
-=@customer.address
-%br
-=@customer.postcode
-%br
-=@customer.county
-%br
-=@customer.city
-%br
-=@customer.country
+.center
+  %h5.space-50 Order Confirmed
+  %h5.space-50 Shipping Details
+  =@customer.forename
+  =@customer.surname
+  %br
+  =@customer.address
+  %br
+  =@customer.postcode
+  %br
+  =@customer.county
+  %br
+  =@customer.city
+  %br
+  =@customer.country
