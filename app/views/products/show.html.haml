@@ -1,4 +1,3 @@
-=render :partial => 'shared/header'
 #body
   .center
     %span.box1.box2
@@ -18,10 +17,12 @@
       %td= @product.model
   .center.space-50
     %h3 Price
-    %h3= @product.price
-    - if current_customer.admin?
+    %h3
+      $
+      = @product.variable_price
+    - if current_customer.admin? && current_customer.id == @product.customer_id
       = link_to 'Edit', controller: "products", action: "edit", product: @product.id
-      = link_to 'Delete', controller: "products", action: "destroy", product: @product.id
+      = link_to 'Delete', product_path(@product), method: :delete
 
 = form_for @order, :url => orders_path, :html => {:method => :post} do |f|
   - if @order.errors.any?
@@ -36,7 +37,7 @@
   %p.center.space-20
     = f.label :quantity
     %br
-    = f.text_field :quantity, "data-validation"=>"length", "data-validation-length"=> "min1"
+    = f.number_field :quantity, "data-validation"=>"length", "data-validation-length"=> "min1"
     %br
     = f.hidden_field :product_id, value: @product.id
     = f.hidden_field :customer_id, value: @customer.customer_id
@@ -44,11 +45,19 @@
   %p.actions.center
     %br
     %script.stripe-button{ src: "https://checkout.stripe.com/checkout.js",
-          data: {amount: @product.price * 100, description: @product.title, email: @customer.email, key: Rails.configuration.stripe[:publishable_key]}}
+          data: {amount: @product.variable_price * 100, description: @product.title, email: @customer.email, key: Rails.configuration.stripe[:publishable_key]}}
 
-%script{:src => "//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"}
+
 %script{:src => "//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"}
 
 :javascript
+  var quantityAmount = #{@product.variable_price}
   $.validate({
   });
+
+  $("#order_quantity").on("keyup", function(){
+    var quantityValue = $(this).val();
+    k = (parseInt(quantityValue) * quantityAmount) * 100;
+
+    $('.stripe-button').attr('data-amount', k)
+  })

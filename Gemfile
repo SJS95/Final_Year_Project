@@ -5,13 +5,14 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 gem "haml-rails", "~> 1.0"
-gem 'bootstrap', '~> 4.0.0'
+gem 'bootstrap', '~> 4.0'
 gem 'devise'
 gem 'stripe'
 gem 'carrierwave'
 gem 'mini_magick'
-gem 'jquery-rails'
 gem 'popper_js', '~> 1.12.9'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.5'

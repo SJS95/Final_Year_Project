@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.search(params[:term])
+    @products = Product.active.search(params[:term])
   end
 
   def show
@@ -39,14 +39,16 @@ class ProductsController < ApplicationController
 
   def destroy
     @product = Product.find(params[:id])
-    @product.destroy
+    @product.update_attributes(active: false)
 
     redirect_to home_index_path
   end
 
+
+
   private
   def product_params
-    params.require(:product).permit(:product_id, :title, :description, :price, :manufacturer, :model, :brand, :image, :cheaper_target,
+    params.require(:product).permit(:product_id, :customer_id, :title, :description, :price, :manufacturer, :model, :brand, :image, :cheaper_target,
                                     :cheaper_price, :cheapest_target, :cheapest_price, :term, :product_end_date)
   end
 end

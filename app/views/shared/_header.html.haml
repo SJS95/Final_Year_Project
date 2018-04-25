@@ -6,17 +6,12 @@
     %meta{:charset => "utf-8"}
     %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
 
-    %link{:crossorigin => "anonymous", :href => "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css", :integrity => "sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ", :rel => "stylesheet"}/
-    %script{:crossorigin => "anonymous", :integrity => "sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n", :src => "https://code.jquery.com/jquery-3.1.1.slim.min.js"}
-    %script{:crossorigsin => "anonymous", :integrity => "sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb", :src => "https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"}
-    %script{:crossorigin => "anonymous", :integrity => "sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn", :src => "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"}
-
   %body
-    %nav.navbar.navbar-toggleable-md.navbar-light.bg-faded
-      %button.navbar-toggler.navbar-toggler-right{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
-        %span.navbar-toggler-icon
+    %nav.navbar.navbar-expand-lg.navbar-light.bg-light
       %a.navbar-brand{:href => "/home/index"} Car Group Buys
-      #navbarSupportedContent.collapse.navbar-collapse
+      %button.navbar-toggler{"aria-controls" => "navbarText", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarText", "data-toggle" => "collapse", :type => "button"}
+        %span.navbar-toggler-icon
+      #navbarText.collapse.navbar-collapse
         %ul.navbar-nav.mr-auto
           %li.nav-item
             %a.nav-link{:href => "/products/index"} Products
@@ -24,7 +19,7 @@
             %a.nav-link{:href => "#"} Contact
           - if customer_signed_in?
             %li.nav-item
-            %a.nav-link{:href => "/customers/edit"} Profile
+            = link_to "Profile", profiles_path, class: "nav-link"
 
         - if customer_signed_in?
           = form_tag(products_path, method: :get, class: "form-inline my-2 my-lg-0") do
@@ -33,5 +28,3 @@
           = link_to('Logout', destroy_customer_session_path, method: :delete, class: "btn btn-primary")
         - else
           = link_to('Login', new_customer_session_path, class: "btn btn-style")
-
-

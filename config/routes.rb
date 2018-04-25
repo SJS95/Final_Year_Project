@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :devise
   resources :charges
   resources :orders
+  resources :profiles, only: [:index]
 
   resources :images, only: [:index, :new, :create, :destroy]
 

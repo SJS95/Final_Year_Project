@@ -8,6 +8,7 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.save
+        @order.update_attributes(order_number: Order.generate_order_number)
         format.html { redirect_to orders_path(@order) }
       else
         format.html { render :new }
@@ -27,6 +28,6 @@ class OrdersController < ApplicationController
 
   private
   def order_params
-    params.require(:order).permit(:customer_id, :product_id, :order_date, :quantity)
+    params.require(:order).permit(:customer_id, :product_id, :order_date, :quantity, :order_number)
   end
 end

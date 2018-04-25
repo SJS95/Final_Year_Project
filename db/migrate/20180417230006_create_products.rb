@@ -2,9 +2,9 @@ class CreateProducts < ActiveRecord::Migration[5.1]
   def change
     create_table :products, id: false do |t|
       t.primary_key :product_id
-      t.references :order
+      t.references :customer
       t.string :title
-      t.string :description
+      t.text :description
       t.integer :price
       t.string :manufacturer
       t.string :model

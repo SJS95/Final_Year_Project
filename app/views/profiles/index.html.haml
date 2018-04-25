@@ -1,0 +1,21 @@
+.row
+  .col-md-12
+    %h3= @customer&.forename
+    = link_to "Edit Details", edit_customer_registration_path(@customer), class:"btn btn-primary"
+.row.space-50
+  - if @orders.blank?
+    %h3 No Orders Placed
+  - else
+    %table.table.table-condensed
+      %thead
+        %tr
+        %th Order Number
+        %th Product
+        %th Order Total
+      %tbody
+        -@orders.each do |order|
+          %tr
+            %td= order.order_number
+            %td= order.product.title
+            %td= order.quantity
+
