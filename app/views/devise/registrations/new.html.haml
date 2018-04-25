@@ -13,12 +13,16 @@
       - if @minimum_password_length
         %em
           (#{@minimum_password_length} characters minimum)
-      %br/
+      %br
       = f.password_field :password, autocomplete: "off"
     .field.space-20
       = f.label :password_confirmation
-      %br/
+      %br
       = f.password_field :password_confirmation, autocomplete: "off"
+    .field.space-20
+      = f.label :would_you_like_to_host_your_own_group_buys?
+      = f.label :tick_here_if_yes
+      = f.check_box :admin
     .actions.space-20
       = f.submit "Sign up"
     .space-20

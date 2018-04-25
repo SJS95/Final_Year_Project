@@ -19,9 +19,9 @@
   .center.space-50
     %h3 Price
     %h3= @product.price
-
-    = link_to 'Edit', controller: "products", action: "edit", product: @product.id
-    = link_to 'Delete', controller: "products", action: "destroy", product: @product.id
+    - if current_customer.admin?
+      = link_to 'Edit', controller: "products", action: "edit", product: @product.id
+      = link_to 'Delete', controller: "products", action: "destroy", product: @product.id
 
 = form_for @order, :url => orders_path, :html => {:method => :post} do |f|
   - if @order.errors.any?

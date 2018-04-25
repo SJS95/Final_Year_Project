@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180420185536) do
+ActiveRecord::Schema.define(version: 20180425110657) do
 
   create_table "customers", primary_key: "customer_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "order_id"
+    t.bigint "product_id"
     t.string "forename"
     t.string "surname"
     t.string "address"
@@ -33,8 +34,10 @@ ActiveRecord::Schema.define(version: 20180420185536) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
+    t.boolean "admin", default: false
     t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["order_id"], name: "index_customers_on_order_id"
+    t.index ["product_id"], name: "index_customers_on_product_id"
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
 
@@ -51,6 +54,7 @@ ActiveRecord::Schema.define(version: 20180420185536) do
 
   create_table "products", primary_key: "product_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "order_id"
+    t.bigint "customer_id"
     t.string "title"
     t.string "description"
     t.integer "price"
@@ -65,6 +69,7 @@ ActiveRecord::Schema.define(version: 20180420185536) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "product_end_date"
+    t.index ["customer_id"], name: "index_products_on_customer_id"
     t.index ["order_id"], name: "index_products_on_order_id"
   end
 

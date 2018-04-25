@@ -2,7 +2,8 @@
   .container
     - if customer_signed_in?
       %br
-      = link_to 'Add product', new_product_path(@product), class: "btn btn-primary"
+        - if current_customer.admin?
+          = link_to 'Add product', new_product_path(@product), class: "btn btn-primary"
       %br
       .row
         .span4
