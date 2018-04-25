@@ -15,5 +15,10 @@
                 %h4= product.title
                 = image_tag product.image_url, class: "small" rescue nil
                 %p.card-text= product.description
-                %h4= product.price
+                - if current_order_total(product.id) < product.cheaper_target
+                  %h4= product.price
+                - elsif current_order_total(product.id) > product.cheaper_target && current_order_total(product.id) < product.cheapest_target
+                  %h4= product.cheaper_price
+                - else
+                  %h4= product.cheapest_price
                 = link_to 'More details', product_path(product), class: "btn btn-primary"

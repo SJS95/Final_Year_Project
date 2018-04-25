@@ -27,7 +27,7 @@
   - if @order.errors.any?
     #error_explanation
       %h2
-        = pluralize(@porder.errors.count, "error")
+        = pluralize(@order.errors.count, "error")
         prohibited this product from being saved:
       %ul
         - @order.errors.full_messages.each do |message|
@@ -36,7 +36,7 @@
   %p.center.space-20
     = f.label :quantity
     %br
-    = f.text_field :quantity
+    = f.text_field :quantity, "data-validation"=>"length", "data-validation-length"=> "min1"
     %br
     = f.hidden_field :product_id, value: @product.id
     = f.hidden_field :customer_id, value: @customer.customer_id
@@ -44,4 +44,11 @@
   %p.actions.center
     %br
     %script.stripe-button{ src: "https://checkout.stripe.com/checkout.js",
-          data: {amount: @product.price * 10, description: @product.title, email: @customer.email, key: Rails.configuration.stripe[:publishable_key]}}
+          data: {amount: @product.price * 100, description: @product.title, email: @customer.email, key: Rails.configuration.stripe[:publishable_key]}}
+
+%script{:src => "//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"}
+%script{:src => "//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"}
+
+:javascript
+  $.validate({
+  });

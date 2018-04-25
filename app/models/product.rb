@@ -8,6 +8,11 @@ class Product < ApplicationRecord
     end
   end
 
+  def variable_price
+    @product = Product.find(params[:id])
+    @order_qty = Order.where(:product_id => [@product.id]).sum(:quantity)
+  end
+
 
   mount_uploader :image, ImageUploader
 end
